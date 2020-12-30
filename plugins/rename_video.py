@@ -105,14 +105,11 @@ async def rename_video(bot, message):
             )
         )
         if the_real_download_location is not None:
-          try:
             await bot.edit_message_text(
                 text=script.SAVED_RECVD_DOC_FILE,
                 chat_id=message.chat.id,
                 message_id=a.message_id
             )
-          except:
-              pass
             new_file_name = download_location + file_name + "." + extension
             os.rename(the_real_download_location, new_file_name)
             await bot.edit_message_text(
