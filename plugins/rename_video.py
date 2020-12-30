@@ -61,7 +61,7 @@ async def rename_video(bot, message):
         await message.reply_text('Why did you delete that 😕', True)
         return
         
-    filetype = media.document or media.video or media.audio or media.voice or media.video_note
+    filetype = media.video or media.document or media.audio or media.voice or media.video_note
     try:
         actualname = filetype.file_name
         splitit = actualname.split(".")
@@ -110,7 +110,8 @@ async def rename_video(bot, message):
                 chat_id=message.chat.id,
                 message_id=a.message_id
             )
-
+            except:
+                pass
             new_file_name = download_location + file_name + "." + extension
             os.rename(the_real_download_location, new_file_name)
             await bot.edit_message_text(
@@ -118,7 +119,18 @@ async def rename_video(bot, message):
                 chat_id=message.chat.id,
                 message_id=a.message_id
                 )
-            #logger.info(the_real_download_location)
+            logger.info(the_real_download_location)
+            width = 0
+            height = 0
+            duration = 0
+            metadata = extractMetadata(createParser(new_file_name))
+            try:
+             if metadata.has("duration"):
+                duration = metadata.get('duration').seconds
+            except:
+              pass
+            thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
+            #if not os.path.exists(thumb_image_path):
 
             if os.path.exists(thumb_image_path):
                 width = 0
@@ -139,6 +151,7 @@ async def rename_video(bot, message):
             await bot.send_video(
                 chat_id=message.chat.id,
                 video=new_file_name,
+                duration=duration,
                 thumb=thumb_image_path,
                 caption=f"<b>{file_name}</b>",
                 # reply_markup=reply_markup,
