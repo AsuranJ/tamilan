@@ -23,7 +23,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ForceRepl
 from pyrogram.errors import UserNotParticipant
 
 from plugins.rename_file import rename_doc
-
+from plugins.rename_video import rename_video
 
 @Client.on_message(filters.command(["help"]))
 def help_user(bot, update):
