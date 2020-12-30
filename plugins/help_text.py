@@ -78,6 +78,7 @@ async def rename_cb(bot, update):
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="📝 RENAME 📝", callback_data="rename_button1"), InlineKeyboardButton(text="🎥 RENAME VIDEO 🎥", callback_data="rename_button2"),],
                                                 [InlineKeyboardButton(text="✖️ CANCEL ✖️", callback_data="cancel_e")]]),
         parse_mode="html",
+        resize_keyboard=True
         reply_to_message_id=update.message_id,
         disable_web_page_preview=True   
     )   
