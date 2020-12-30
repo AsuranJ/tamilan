@@ -42,12 +42,12 @@ async def force_name(bot, message):
 async def cus_name(bot, message):
     
     if (message.reply_to_message.reply_markup) and isinstance(message.reply_to_message.reply_markup, ForceReply):
-        asyncio.create_task(rename_doc(bot, message))     
+        asyncio.create_task(rename_video(bot, message))     
     else:
         print('No media present')
 
     
-async def rename_doc(bot, message):
+async def rename_video(bot, message):
     
     mssg = await bot.get_messages(
         message.chat.id,
@@ -118,7 +118,7 @@ async def rename_doc(bot, message):
                 chat_id=message.chat.id,
                 message_id=a.message_id
                 )
-            # logger.info(the_real_download_location)
+            #logger.info(the_real_download_location)
 
             if os.path.exists(thumb_image_path):
                 width = 0
@@ -136,9 +136,9 @@ async def rename_doc(bot, message):
                 thumb_image_path = None
 
             c_time = time.time()
-            await bot.send_document(
+            await bot.send_video(
                 chat_id=message.chat.id,
-                document=new_file_name,
+                video=new_file_name,
                 thumb=thumb_image_path,
                 caption=f"<b>{file_name}</b>",
                 # reply_markup=reply_markup,
