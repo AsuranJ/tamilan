@@ -20,6 +20,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ForceReply
 
 from plugins.helpers import progress_for_pyrogram
+from ffmpeg import take_screen_shot
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
@@ -105,18 +106,21 @@ async def convert_video(bot, message):
             )
         )
         if the_real_download_location is not None:
-            await bot.edit_message_text(
-                text=script.SAVED_RECVD_DOC_FILE,
-                chat_id=message.chat.id,
-                message_id=a.message_id
-            )
-            new_file_name = download_location + file_name + "." + extension
+            try:
+                await bot.edit_message_text(
+                    text=Translation.SAVED_RECVD_DOC_FILE,
+                    chat_id=update.chat.id,
+                    message_id=a.message_id
+                )
+            except:
+                pass
+            new_file_name = download_location + file_name
             os.rename(the_real_download_location, new_file_name)
-            #await bot.edit_message_text(
-                #text=script.UPLOAD_START,
-                #chat_id=message.chat.id,
-                #message_id=a.message_id
-                #)
+            await bot.edit_message_text(
+                text=Translation.UPLOAD_START,
+                chat_id=update.chat.id,
+                message_id=a.message_id
+                )
             logger.info(the_real_download_location)
             width = 0
             height = 0
@@ -128,9 +132,12 @@ async def convert_video(bot, message):
             except:
               pass
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
-            #if not os.path.exists(thumb_image_path):
-
-            if os.path.exists(thumb_image_path):
+            if not os.path.exists(thumb_image_path):
+               try:
+                    thumb_image_path = await take_screen_shot(new_file_name, os.path.dirname(new_file_name), 7)
+               except:
+                    thumb_image_path = await take_screen_shot(new_file_name, os.path.dirname(new_file_name), 0)
+            else:
                 width = 0
                 height = 0
                 metadata = extractMetadata(createParser(thumb_image_path))
@@ -138,13 +145,16 @@ async def convert_video(bot, message):
                     width = metadata.get("width")
                 if metadata.has("height"):
                     height = metadata.get("height")
+                # resize image
+                # ref: https://t.me/PyrogramChat/44663
+                # https://stackoverflow.com/a/21669827/4723940
                 Image.open(thumb_image_path).convert("RGB").save(thumb_image_path)
                 img = Image.open(thumb_image_path)
-                img.resize((90, height))
+                # https://stackoverflow.com/a/37631799/4723940
+                # img.thumbnail((90, 90))
+                img.resize((320, height))
                 img.save(thumb_image_path, "JPEG")
-            else:
-                thumb_image_path = None
-
+                # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
             c_time = time.time()
             await bot.send_video(
                 chat_id=message.chat.id,
