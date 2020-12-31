@@ -1,7 +1,11 @@
 class script(object):
     START_TEXT = """ A Simple File Renamer Bot With Permanent Thumbnail support!💯
 
-<b>Send me any Telegram file and choose appropriate option! </b>"""
+<b>Send me any Telegram file and choose appropriate option! 
+
+/showthumbnail - For Show Your Thumbnail
+
+/deletethumbnail - Delete Thumbnail</b>"""
 
     RENAME_403_ERR = "What Are You Doing? You are Banned"
     UPGRADE_TEXT = "CONTACT @SeroalCoIn"
