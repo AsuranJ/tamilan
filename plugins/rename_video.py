@@ -20,7 +20,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ForceReply
 
 from plugins.helpers import progress_for_pyrogram
-from ffmpeg import take_screen_shot
+from plugins.ffmpeg import take_screen_shot
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
