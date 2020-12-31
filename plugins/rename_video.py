@@ -43,12 +43,12 @@ async def force_name(bot, message):
 async def cus_name(bot, message):
     
     if (message.reply_to_message.reply_markup) and isinstance(message.reply_to_message.reply_markup, ForceReply):
-        asyncio.create_task(convert_video(bot, message))     
+        asyncio.create_task(rename_video(bot, message))     
     else:
         print('No media present')
 
     
-async def convert_video(bot, message):
+async def rename_video(bot, message):
     
     mssg = await bot.get_messages(
         message.chat.id,
