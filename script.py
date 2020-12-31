@@ -30,8 +30,5 @@ Follow These steps..
 🌀 Select rename option and enter your new name ( extension is not required )
 
 NOTE : You must join our channel in order to USE ME
-
-Channel: @SerialCoIn
-
 """
 
