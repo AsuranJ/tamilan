@@ -157,45 +157,35 @@ async def rename_video(bot, message):
                 # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
             c_time = time.time()
             await bot.send_video(
-                chat_id=message.chat.id,
+                chat_id=update.chat.id,
                 video=new_file_name,
                 duration=duration,
-                #width=width,
-                #height=height,
-                #supports_streaming=True,
                 thumb=thumb_image_path,
                 caption=f"<b>{file_name}</b>",
                 # reply_markup=reply_markup,
-                reply_to_message_id=message.reply_to_message.message_id,
+                reply_to_message_id=update.reply_to_message.message_id,
                 progress=progress_for_pyrogram,
                 progress_args=(
                     script.UPLOAD_START,
-                    a, 
+                    b, 
                     c_time
                 )
             )
-
             try:
                 os.remove(new_file_name)
+                #os.remove(thumb_image_path)
             except:
-                pass                 
-            try:
-                os.remove(thumb_image_path)
-            except:
-                pass  
-
+                pass
             await bot.edit_message_text(
                 text=script.AFTER_SUCCESSFUL_UPLOAD_MSG,
-                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🙌🏻 SHARE ME 🙌🏻", url="tg://msg?text=Hai%20Friend%20%E2%9D%A4%EF%B8%8F%2C%0AToday%20i%20just%20found%20out%20an%20intresting%20and%20Powerful%20%2A%2ARename%20Bot%2A%2A%20for%20Free%F0%9F%A5%B0.%20%0A%2A%2ABot%20Link%20%3A%2A%2A%20%40TurboRenamer%20%F0%9F%94%A5")]]),
-                chat_id=message.chat.id,
-                message_id=a.message_id,
+                chat_id=update.chat.id,
+                message_id=b.message_id,
                 disable_web_page_preview=True
             )
-            
     else:
         await bot.send_message(
             chat_id=update.chat.id,
-            text=script.REPLY_TO_DOC_FOR_C2V,
+            text=script.REPLY_TO_DOC_FOR_RENAME_FILE,
             reply_to_message_id=update.message_id
         )
 
