@@ -112,11 +112,11 @@ async def rename_video(bot, message):
             )
             new_file_name = download_location + file_name + "." + extension
             os.rename(the_real_download_location, new_file_name)
-            await bot.edit_message_text(
-                text=script.UPLOAD_START,
-                chat_id=message.chat.id,
-                message_id=a.message_id
-                )
+            #await bot.edit_message_text(
+                #text=script.UPLOAD_START,
+                #chat_id=message.chat.id,
+                #message_id=a.message_id
+                #)
             logger.info(the_real_download_location)
             width = 0
             height = 0
@@ -184,9 +184,9 @@ async def rename_video(bot, message):
             
     else:
         await bot.send_message(
-            chat_id=message.chat.id,
-            text="You're B A N N E D",
-            reply_to_message_id=message.message_id
+            chat_id=update.chat.id,
+            text=script.REPLY_TO_DOC_FOR_C2V,
+            reply_to_message_id=update.message_id
         )
 
 
