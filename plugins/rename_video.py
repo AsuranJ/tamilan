@@ -140,7 +140,7 @@ async def rename_video(bot, message):
                     height = metadata.get("height")
                 Image.open(thumb_image_path).convert("RGB").save(thumb_image_path)
                 img = Image.open(thumb_image_path)
-                img.resize((320, height))
+                img.resize((90, height))
                 img.save(thumb_image_path, "JPEG")
             else:
                 thumb_image_path = None
@@ -150,6 +150,9 @@ async def rename_video(bot, message):
                 chat_id=message.chat.id,
                 video=new_file_name,
                 duration=duration,
+                width=width,
+                height=height,
+                supports_streaming=True,
                 thumb=thumb_image_path,
                 caption=f"<b>{file_name}</b>",
                 # reply_markup=reply_markup,
@@ -173,7 +176,7 @@ async def rename_video(bot, message):
 
             await bot.edit_message_text(
                 text=script.AFTER_SUCCESSFUL_UPLOAD_MSG,
-                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🙌🏻 SHARE ME 🙌🏻", url="tg://msg?text=Hai%20Friend%20%E2%9D%A4%EF%B8%8F%2C%0AToday%20i%20just%20found%20out%20an%20intresting%20and%20Powerful%20%2A%2ARename%20Bot%2A%2A%20for%20Free%F0%9F%A5%B0.%20%0A%2A%2ABot%20Link%20%3A%2A%2A%20%40TroJanzRenamer%20%F0%9F%94%A5")]]),
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🙌🏻 SHARE ME 🙌🏻", url="tg://msg?text=Hai%20Friend%20%E2%9D%A4%EF%B8%8F%2C%0AToday%20i%20just%20found%20out%20an%20intresting%20and%20Powerful%20%2A%2ARename%20Bot%2A%2A%20for%20Free%F0%9F%A5%B0.%20%0A%2A%2ABot%20Link%20%3A%2A%2A%20%40TurboRenamer%20%F0%9F%94%A5")]]),
                 chat_id=message.chat.id,
                 message_id=a.message_id,
                 disable_web_page_preview=True
