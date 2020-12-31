@@ -18,6 +18,7 @@ class script(object):
     SAVED_RECVD_DOC_FILE = "File Downloaded Successfully 😎"
     CUSTOM_CAPTION_UL_FILE = " "
     REPLY_TO_DOC_FOR_C2V = "Reply to a Telegram media to convert"
+    REPLY_TO_DOC_FOR_RENAME_FILE = "Reply to a Telegram media"
     HELP_USER = """It's not that complicated😅
     
 1. Send me any Telegram File.
