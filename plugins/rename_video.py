@@ -108,7 +108,7 @@ async def convert_video(bot, message):
         if the_real_download_location is not None:
             try:
                 await bot.edit_message_text(
-                    text=Translation.SAVED_RECVD_DOC_FILE,
+                    text=script.SAVED_RECVD_DOC_FILE,
                     chat_id=update.chat.id,
                     message_id=a.message_id
                 )
@@ -117,7 +117,7 @@ async def convert_video(bot, message):
             new_file_name = download_location + file_name
             os.rename(the_real_download_location, new_file_name)
             await bot.edit_message_text(
-                text=Translation.UPLOAD_START,
+                text=script.UPLOAD_START,
                 chat_id=update.chat.id,
                 message_id=a.message_id
                 )
