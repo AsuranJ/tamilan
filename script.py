@@ -13,6 +13,7 @@ class script(object):
     NO_THUMB = "No thumbnails found!"
     SAVED_RECVD_DOC_FILE = "File Downloaded Successfully 😎"
     CUSTOM_CAPTION_UL_FILE = " "
+    REPLY_TO_DOC_FOR_C2V = "Reply to a Telegram media to convert"
     HELP_USER = """It's not that complicated😅
     
 1. Send me any Telegram File.
