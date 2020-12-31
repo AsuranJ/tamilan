@@ -56,7 +56,7 @@ async def save_photo(bot, update):
         )
 
 
-@Client.on_message(filters.command(["delthumb"]))
+@Client.on_message(filters.command(["deletethumbnail"]))
 async def delete_thumbnail(bot, update):
     if update.from_user.id in Config.BANNED_USERS:
         await bot.delete_messages(
@@ -86,7 +86,7 @@ async def delete_thumbnail(bot, update):
     )
 
 
-@Client.on_message(filters.command(["showthumb"]))
+@Client.on_message(filters.command(["showthumbnail"]))
 async def show_thumb(bot, update):
     if update.from_user.id in Config.BANNED_USERS:
         await bot.delete_messages(
